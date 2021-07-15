@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  client:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TITLE: 'Aplicação no docker'
+    ports:
+      - '8081:8081'
