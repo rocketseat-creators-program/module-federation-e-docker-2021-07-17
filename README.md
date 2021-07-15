@@ -1,0 +1,1 @@
+# ws-module-federation-docker
