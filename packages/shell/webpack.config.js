@@ -5,6 +5,8 @@ const ModuleFederationPlugin = require('webpack').container
 const Dotenv = require('dotenv-webpack')
 const dependencies = require('./package.json').dependencies
 
+const { handleWebpackMode, mfeDynamicRemoteHost } = require('./mfe-utils');
+
 const envPaths = {
   production: path.resolve('./', `.env.production`),
   development: path.resolve('./', `.env.development`),
@@ -25,19 +27,11 @@ module.exports = (_, args) => {
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       port: 3002,
-      publicPath: process.env.PUBLIC_URL || '/',
-      historyApiFallback: {
-        rewrites: [
-          {
-            from: /^.*[^/]$/,
-            to: (context) => `${context.parsedUrl.pathname}/`,
-          },
-        ],
-      },
+      publicPath: '/',
     },
 
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.json']
     },
 
     module: {
@@ -101,7 +95,7 @@ module.exports = (_, args) => {
          * @description é o nome do módulo na federação
          */
 
-        name: 'header',
+        name: 'shell',
 
         /**
          * @name filename
@@ -119,6 +113,14 @@ module.exports = (_, args) => {
          * Exemplo: shared@http://localhost:3003/remoteEntry.js
          */
         remotes: {
+          header: handleWebpackMode({
+            mode: args.mode,
+            production: mfeDynamicRemoteHost({
+              appName: 'header',
+              remoteHostVariable: 'HEADER_HOST',
+            }),
+            development: 'header@http://localhost:8081/remoteEntry.js',
+          })
         },
 
         /**
@@ -149,7 +151,7 @@ module.exports = (_, args) => {
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        base: process.env.PUBLIC_URL || '/',
+        env: (args.mode === 'production') ? '<script src="env.js"></script>' : ''
       }),
       new Dotenv({
         safe: true,

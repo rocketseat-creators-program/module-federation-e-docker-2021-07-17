@@ -1,3 +1,3 @@
 (function setEnvironment(env) {
-  env.TITLE = '${TITLE}'
-})(window['HEADER_ENV'] || (window['HEADER_ENV'] = {}))
+  env.HEADER_HOST = '${HEADER_HOST}'
+})(window['APP_ENV'] || (window['APP_ENV'] = {}))

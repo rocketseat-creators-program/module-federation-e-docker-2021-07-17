@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ModuleFederationPlugin = require('webpack').container
-  .ModuleFederationPlugin
+const ModuleFederationPlugin =
+  require('webpack').container.ModuleFederationPlugin
 const Dotenv = require('dotenv-webpack')
 const dependencies = require('./package.json').dependencies
 
@@ -25,15 +25,7 @@ module.exports = (_, args) => {
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       port: 3001,
-      publicPath: process.env.PUBLIC_URL || '/',
-      historyApiFallback: {
-        rewrites: [
-          {
-            from: /^.*[^/]$/,
-            to: (context) => `${context.parsedUrl.pathname}/`,
-          },
-        ],
-      },
+      publicPath: '/',
     },
 
     resolve: {
@@ -118,8 +110,7 @@ module.exports = (_, args) => {
          * é o nome do módulo e o valor segue o seguinte padrão NOME_DO_MODULO@ENDEREÇO_DE_SUA_DEFINIÇÂO.
          * Exemplo: shared@http://localhost:3003/remoteEntry.js
          */
-        remotes: {
-        },
+        remotes: {},
 
         /**
          * @name exposes
@@ -127,7 +118,9 @@ module.exports = (_, args) => {
          * são o path do módulo para a federação e o valor é o path do módulo nessa aplicação.
          * Exemplo: './App':'./src/App'
          */
-        exposes: {},
+        exposes: {
+          './Header': './src/components/Header'
+        },
 
         /**
          * @name shared
@@ -149,7 +142,7 @@ module.exports = (_, args) => {
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        base: process.env.PUBLIC_URL || '/',
+        env: (args.mode === 'production') ? '<script src="env.js"></script>' : ''
       }),
       new Dotenv({
         safe: true,

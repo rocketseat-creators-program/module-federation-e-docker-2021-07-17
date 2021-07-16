@@ -8,13 +8,13 @@ function isBrowser(): boolean {
   }
 }
 
-const ENV = isBrowser() ? (window as any).HEADER_ENV : process.env // Solve variables using Docker
+const ENV = isBrowser() ? (window as any).APP_ENV : process.env // Solve variables using Docker
 
 export interface Environment {
   TITLE: string
 }
 
-export const getEnv = (env = process.env.HEADER_NODE_ENV): Environment => {
+export const getEnv = (env = process.env.APP_ENV): Environment => {
   switch (env) {
     case 'production':
       return {

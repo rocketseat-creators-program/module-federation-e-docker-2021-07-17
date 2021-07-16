@@ -6,6 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      TITLE: 'Aplicação no docker'
+      HEADER_HOST: 'http://localhost:8081/remoteEntry.js'
     ports:
-      - '8081:8081'
+      - '8082:8080'

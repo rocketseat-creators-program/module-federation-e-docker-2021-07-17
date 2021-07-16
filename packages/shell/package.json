@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode development && webpack-cli serve",
+    "start": "webpack-cli serve --mode development",
     "build": "webpack --mode production",
     "serve": "serve dist -p 3002",
     "build:dev": "webpack --mode development",
@@ -19,20 +19,8 @@
     "docker:build": "docker build -t shell-image .",
     "docker:run": "docker run --name shell -d -p 3002:3002 shell-image"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run type-check"
-    }
-  },
-  "lint-staged": {
-    "*.@(ts|tsx)": [
-      "npm run lint",
-      "npm run format"
-    ]
-  },
   "dependencies": {
-    "@types/styled-components": "^5.1.11",
+    "gsap": "^3.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.0",
@@ -46,6 +34,7 @@
     "@types/jest": "^25.1.4",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
+    "@types/styled-components": "^5.1.11",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "babel-jest": "^25.2.3",
@@ -57,10 +46,8 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-react": "^7.19.0",
     "html-webpack-plugin": "^4.5.0",
-    "husky": "^4.2.3",
     "jest": "^25.2.3",
     "jest-watch-typeahead": "^0.5.0",
-    "lint-staged": "^10.0.10",
     "prettier": "^2.0.2",
     "typescript": "^3.8.3",
     "webpack": "^5.1.0",

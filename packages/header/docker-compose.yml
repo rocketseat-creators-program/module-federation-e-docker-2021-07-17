@@ -8,4 +8,4 @@ services:
     environment:
       TITLE: 'Aplicação no docker'
     ports:
-      - '8081:8081'
+      - '8081:8080'

@@ -1,6 +1,6 @@
 # Template - ModuleFederation e NGINX
 
-Esse template abstrai React no contexto do ModuleFederation com variáveis de ambiente docker e faz o 
+Esse template abstrai React no contexto do ModuleFederation com variáveis de ambiente docker e faz o
 proxy reverso dessa aplicação usando NGINX.
 
 ## Variáveis de ambiente
@@ -9,8 +9,8 @@ No contexto de desenvolvimento, na sua máquina, é o procedimento padrão. Bast
 
 Para as variáveis funcionarem no contexto da pipeline você precisa de 2 passos:
 
-* Adicionar as variáveis nos arquivos do HelmChart da pasta `Config`;
-* Adicionar as variáveis no arquivo `env.template.js`.
+- Adicionar as variáveis nos arquivos do HelmChart da pasta `Config`;
+- Adicionar as variáveis no arquivo `env.template.js`.
 
 ### Variáveis no HelmChart
 
@@ -86,5 +86,5 @@ Para utilizar a `mfeDynamicRemoteHost`, você precisa definir qual no nome da ap
 nosso caso a `app2` e identificar qual o nome da variável que guarda o valor do host. Nesse caso o nome da variável
 é `APP2_REMOTE_URL`.
 
-Pra isso funcionar é necessário configurar a variável `APP2_REMOTE_URL` confirme foi explicado no tópico que versa 
+Pra isso funcionar é necessário configurar a variável `APP2_REMOTE_URL` confirme foi explicado no tópico que versa
 sobre Variáveis de ambiente.

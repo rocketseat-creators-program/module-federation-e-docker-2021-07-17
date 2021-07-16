@@ -1,7 +1,5 @@
 FROM node:12.4.0-alpine as build
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-ARG PUBLIC_URL=/header/
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
 RUN npm ci
@@ -17,8 +15,7 @@ COPY env.sh env.sh
 COPY main.sh main.sh
 COPY env.template.js env.template.js
 COPY /default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /usr/share/nginx/html/header
+COPY --from=build /app/dist /usr/share/nginx/html
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx /etc/nginx/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-EXPOSE 8081
-ENTRYPOINT ["sh", "main.sh", "header"]
+ENTRYPOINT ["sh", "main.sh"]
