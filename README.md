@@ -136,3 +136,5 @@ COPY env.template.js env.template.js
 ```
 
 Pronto! Agora podemos resolver nossas variáveis de ambiente de forma dinâmica.
+
+## ModuleFederation Dynamic Host
