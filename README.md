@@ -180,3 +180,6 @@ Como essa informação é dinâmica, precisamos inserir a variáveis do nosso ho
 
 Pronto! Agora você tem hosts remotos dinâmicos.
 
+Muito obrigado!
+
+Espero que tenham gostado.
