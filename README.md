@@ -138,3 +138,45 @@ COPY env.template.js env.template.js
 Pronto! Agora podemos resolver nossas variáveis de ambiente de forma dinâmica.
 
 ## ModuleFederation Dynamic Host
+
+O plugin do ModuleFederation permite que você configure uma string que representa uma promise nos valores da chave `remote`, dessa forma você pode ter hosts dinâmicos.
+
+Disponibilizamos uma abstração dessa abordagem no arquivo `mfe-utils.js`.
+
+Agora vamos atualizar o `webpack.config.js` para utilizarmos essa estratégia.
+
+```
+module.exports = (_, args) => {
+    ...
+    plugins: [
+      ...
+      new ModuleFederationPlugin({
+        ...
+        remotes:{
+            header: handleWebpackMode({
+                mode: args.mode,
+                production: mfeDynamicRemoteHost({
+                  appName: 'header',
+                  remoteHostVariable: 'HEADER_HOST',
+                }),
+                development: 'header@http://localhost:8081/remoteEntry.js',
+            })
+        }
+        ...
+      })
+     ...
+    ],
+  }
+}
+```
+
+Como essa informação é dinâmica, precisamos inserir a variáveis do nosso host no nosso arquivo de template, `env.template.js`.
+
+``` 
+(function setEnvironment(env) {
+    env.HEADER_HOST = '${HEADER_HOST}';
+})(window['APP_ENV'] || (window['APP_ENV'] = {}))
+```
+
+Pronto! Agora você tem hosts remotos dinâmicos.
+
