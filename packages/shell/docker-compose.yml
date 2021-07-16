@@ -5,7 +5,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      HEADER_HOST: 'http://localhost:8081/remoteEntry.js'
     ports:
       - '8082:8080'

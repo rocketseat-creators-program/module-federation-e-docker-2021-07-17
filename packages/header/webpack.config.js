@@ -142,7 +142,6 @@ module.exports = (_, args) => {
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        env: (args.mode === 'production') ? '<script src="env.js"></script>' : ''
       }),
       new Dotenv({
         safe: true,

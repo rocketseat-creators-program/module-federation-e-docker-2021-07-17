@@ -5,8 +5,6 @@ const ModuleFederationPlugin = require('webpack').container
 const Dotenv = require('dotenv-webpack')
 const dependencies = require('./package.json').dependencies
 
-const { handleWebpackMode, mfeDynamicRemoteHost } = require('./mfe-utils');
-
 const envPaths = {
   production: path.resolve('./', `.env.production`),
   development: path.resolve('./', `.env.development`),
@@ -113,14 +111,7 @@ module.exports = (_, args) => {
          * Exemplo: shared@http://localhost:3003/remoteEntry.js
          */
         remotes: {
-          header: handleWebpackMode({
-            mode: args.mode,
-            production: mfeDynamicRemoteHost({
-              appName: 'header',
-              remoteHostVariable: 'HEADER_HOST',
-            }),
-            development: 'header@http://localhost:8081/remoteEntry.js',
-          })
+          header: 'header@http://localhost:8081/remoteEntry.js'
         },
 
         /**
