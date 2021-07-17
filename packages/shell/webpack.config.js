@@ -111,7 +111,7 @@ module.exports = (_, args) => {
          * Exemplo: shared@http://localhost:3003/remoteEntry.js
          */
         remotes: {
-          header: 'header@http://localhost:8081/remoteEntry.js'
+          header: 'header@http://localhost:3001/remoteEntry.js'
         },
 
         /**
